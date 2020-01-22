@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package clock;
+
+message ClockinRequest {
+  string id = 1;
+  string email= 2;
+}
+
+message ClockinResponse { 
+  string id = 1;
+  string email = 2;
+  string date = 3;
+  string timein = 4;
+}
+
+message ClockoutRequest {
+  string id = 1;
+  string email= 2;
+  string break = 3;
+  string errande = 4;
+  string reason = 5;
+}
+
+message ClockoutResponse { 
+  string id = 1;
+  string email = 2;
+  string date = 3;
+  string timeout = 4;
+}
+
+message ClockDetails { 
+  string id = 1;
+  string email = 2;
+  string date = 3;
+  string timein = 4;
+  string timeout = 5;
+}
+
+service ClockService {
+  rpc Clockin(ClockinRequest) returns (ClockinResponse) {}
+}
+

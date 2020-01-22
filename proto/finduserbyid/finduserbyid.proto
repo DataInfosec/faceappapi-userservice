@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package finduserbyid;
+
+message UserRequest {
+  string id = 1;
+}
+
+message UserResponse { 
+    string firstname = 1;
+    string lastname = 2;
+    string email = 3;
+    string type = 4;
+    string id = 5;
+}
+
+service UserService {
+  rpc UserService(UserRequest) returns (UserResponse) {}
+}
+
