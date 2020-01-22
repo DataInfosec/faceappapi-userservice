@@ -3,7 +3,7 @@ package service
 import (
 	"context"
 	"errors"
-	// "fmt"
+	"fmt"
 
 	"github.com/DataInfosec/faceappapi/locationservice/entity"
 	"github.com/DataInfosec/faceappapi/locationservice/utils/validator"
@@ -13,6 +13,8 @@ import (
 
 	"github.com/DataInfosec/faceappapi/locationservice/utils/connection"
 	"github.com/gin-gonic/gin"
+	"github.com/DataInfosec/faceappapi/proto/finduserbyid"
+	"google.golang.org/grpc"
 )
 
 var collection *mongo.Collection = connection.Connection()
@@ -119,6 +121,13 @@ func (s *Service) FindByUser(ctx *gin.Context) ([]entity.LocationDB, error)  {
 	id := ctx.Param("id")
 	var locations []entity.LocationDB
 	userId, errInvalidId := primitive.ObjectIDFromHex(id)
+
+	userResponse, errUser := FindUserById(id) 
+	if errUser != nil {
+		return locations, errors.New("Location's owner does not exist")
+	}else {
+		fmt.Println("user Response :: ", userResponse)
+	}
 	if errInvalidId != nil {
 		return locations, errors.New("Invalid _id supplied")
 	}
@@ -136,4 +145,20 @@ func (s *Service) FindByUser(ctx *gin.Context) ([]entity.LocationDB, error)  {
 		return  locations, err
 	}
 	return locations, nil
+}
+
+func FindUserById(id string) (*finduserbyid.UserResponse, error){
+	conn, err := grpc.Dial(":50050", grpc.WithInsecure())
+		if err != nil {
+			panic(err)
+		}
+		client := finduserbyid.NewUserServiceClient(conn)
+
+		req := &finduserbyid.UserRequest{Id: id}
+		ctx := context.TODO();
+		if res, err := client.UserService(ctx, req); err == nil {
+				return res, nil
+		} else {
+			return res, err
+		}
 }

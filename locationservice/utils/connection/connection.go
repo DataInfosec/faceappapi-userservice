@@ -16,9 +16,9 @@ import (
 func Connection() *mongo.Collection {
 	// Set client options
 	// DB_URL := "mongodb+srv://elvis:0gbunike@cluster0-oqk2c.mongodb.net/test?retryWrites=true&w=majority"
-	// clientOptions := options.Client().ApplyURI("mongodb+srv://"+os.Getenv("DB_URL")+"?retryWrites=true&w=majority")
+	clientOptions := options.Client().ApplyURI("mongodb+srv://"+os.Getenv("DB_URL")+"?retryWrites=true&w=majority")
 
-	clientOptions := options.Client().ApplyURI("mongodb://localhost:27017")
+	// clientOptions := options.Client().ApplyURI("mongodb://localhost:27017")
 
 	// Connect to MongoDB
 	client, err := mongo.Connect(context.TODO(), clientOptions)

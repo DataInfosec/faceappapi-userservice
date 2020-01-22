@@ -3,18 +3,19 @@ package main
 import (
 	"context"
 	"fmt"
-	"net"
-   "github.com/DataInfosec/faceappapi/shareservice/entity"
-	"github.com/DataInfosec/faceappapi/shareservice/utils/connection"
 	"github.com/DataInfosec/faceappapi/proto/finduserbyid"
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/reflection"
+	"github.com/DataInfosec/faceappapi/shareservice/entity"
+	"github.com/DataInfosec/faceappapi/shareservice/utils/connection"
+	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
-	"go.mongodb.org/mongo-driver/bson"
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/reflection"
+	"net"
 )
 
- var collection *mongo.Collection = connection.Connection()
+var collection *mongo.Collection = connection.Connection()
+
 type server struct {
 }
 
@@ -31,17 +32,17 @@ func (s *server) UserService(ctx context.Context, req *finduserbyid.UserRequest)
 		return nil, err
 	}
 	return &finduserbyid.UserResponse{
-		Firstname:  user.Firstname,
-		Lastname:   user.Lastname,
-		Email:      user.Email,
+		Firstname: user.Firstname,
+		Lastname:  user.Lastname,
+		Email:     user.Email,
 		Type:      user.Type,
-		Id:      user.ID,
+		Id:        user.ID.Hex(),
 	}, nil
 }
 
 func main() {
 	fmt.Println("starting userbyidapplication")
-	lis, _ := net.Listen("tcp", ":50052")
+	lis, _ := net.Listen("tcp", ":50050")
 	srv := grpc.NewServer()
 	finduserbyid.RegisterUserServiceServer(srv, &server{})
 	reflection.Register(srv)
