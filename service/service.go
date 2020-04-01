@@ -6,9 +6,9 @@ import (
 
 	// "fmt"
 
-	"github.com/DataInfosec/faceappapi/proto/finduserbyid"
 	"github.com/DataInfosec/faceappapi-userservice/entity"
 	"github.com/DataInfosec/faceappapi-userservice/utils/validator"
+	"github.com/DataInfosec/faceappapi/proto/finduserbyid"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"

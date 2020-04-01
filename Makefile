@@ -1,9 +1,9 @@
 build:
 	# protoc --proto_path=.:$GOPATH/src --go_out=. --micro_out=.  proto/user/user.proto
-	sudo docker build -t softloft/faceappapi-useruservice:3.4 .
+	sudo docker build -t softloft/faceappapi-useruservice:3.5 .
 
 docker-push:
-	sudo docker push softloft/faceappapi-useruservice:3.4
+	sudo docker push softloft/faceappapi-useruservice:3.5
 
 run: 
 	sudo docker rm -f userservices
@@ -12,6 +12,9 @@ run:
 
 go:
 	env DB_URL=elvis:0gbunike@cluster0-oqk2c.mongodb.net/test LOCAL=yes DB_NAME=faceappdb DB_TABLE=users  SENDGRID_API_KEY=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 go run *.go
+
+test:
+	env DB_URL=elvis:0gbunike@cluster0-oqk2c.mongodb.net/test LOCAL=yes DB_NAME=faceappdb DB_TABLE=users  SENDGRID_API_KEY=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 go test -v
 
 network:
 	sudo docker network ls
