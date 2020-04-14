@@ -21,14 +21,14 @@ What things you need to install the software and how to install them
 
 A step by step series of examples that tell you how to get a development env running
 
-1. run git clone https://github.com/DataInfosec/faceappapi.git
+1. run git clone https://github.com/DataInfosec/faceappapi-userservice.git
 2. go get ./...
 3. cd userservice 
 4. make go
 
 ## Running the tests
 
-1. run git clone https://github.com/DataInfosec/faceappapi.git
+1. run git clone https://github.com/DataInfosec/faceappapi-userservice.git
 2. go get ./...
 3. cd userservice 
 4. make test
