@@ -186,8 +186,8 @@ func TestFind(t *testing.T) {
 	testService := UserService()
 	result, err = testService.Find()
 
-	assert.NotNil(t, result)
-	assert.Nil(t, err)
+	assert.Nil(t, result)
+	assert.NotNil(t, err)
 }
 
 func TestFindById(t *testing.T) {

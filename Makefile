@@ -1,9 +1,9 @@
 build:
 	# protoc --proto_path=.:$GOPATH/src --go_out=. --micro_out=.  proto/user/user.proto
-	sudo docker build -t softloft/faceappapi-useruservice:3.5 .
+	sudo docker build -t softloft/faceappapi-useruservice:3.6 .
 
 docker-push:
-	sudo docker push softloft/faceappapi-useruservice:3.5
+	sudo docker push softloft/faceappapi-useruservice:3.6
 
 run: 
 	sudo docker rm -f userservices
